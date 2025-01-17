@@ -1,0 +1,26 @@
+<table>
+    <thead>
+        <tr>
+            <th>Recipient ID</th>
+            <th>Name</th>
+            <th>Blood Group</th>
+            <th>Contact</th>
+            <th>Received Date</th>
+            <th>Receiving Quantity</th>
+            <th>Branch ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for recipient in recipients %}
+        <tr>
+            <td>{{ recipient[0] }}</td>
+            <td>{{ recipient[1] }}</td>
+            <td>{{ recipient[2] }}</td>
+            <td>{{ recipient[3] }}</td>
+            <td>{{ recipient[4] }}</td>
+            <td>{{ recipient[5] }}</td>
+            <td>{{ recipient[6] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
