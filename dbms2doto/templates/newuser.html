@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New User Registration</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: linear-gradient(135deg, #ff4b2b, #ff416c); /* Vibrant pink gradient */
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-top: 30px;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.6);
+            letter-spacing: 1.5px;
+            font-weight: 700;
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.12); /* Slightly transparent white */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            display: inline-block;
+            text-align: left;
+            width: 95%;
+            max-width:600px;
+            margin: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: 500;
+            font-size: 1rem;
+            color: #ffefef;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        input::placeholder {
+            color: #ccc;
+            font-style: italic;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            box-shadow: 0 0 10px #ff416c; /* Glowing focus effect */
+        }
+
+        button {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: white;
+            background: #ff416c;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            font-family: 'Roboto', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background: #ff4b2b;
+            transform: translateY(-3px);
+        }
+
+        .home-button {
+            background: #ff416c;
+            color: white;
+            padding: 10px 20px;
+            border: 2px solid black; /* Black border for the home button */
+            border-radius: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: 0.3s ease;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .home-button:hover {
+            background:rgb(225, 46, 46);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            form {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .home-button {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-button">Home</a>
+    <h1>New User Registration</h1>
+    <form action="/new-user" method="post">
+        <label for="aadhaar_number">Aadhaar Number:</label>
+        <input type="text" id="aadhaar_number" name="aadhaar_number" required placeholder="Enter your Aadhaar number">
+
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+
+        <label for="date_of_birth">Date of Birth:</label>
+        <input type="date" id="date_of_birth" name="date_of_birth" required oninput="calculateAge()">
+        <input type="hidden" id="age" name="age">
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+            <option value="O">Other</option>
+        </select>
+
+        <label for="contact_number">Contact Number:</label>
+        <input type="text" id="contact_number" name="contact_number" required placeholder="Enter your contact number">
+
+        <label for="blood_group">Blood Group:</label>
+        <select id="blood_group" name="blood_group" required>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+        </select>
+
+        <label for="address">Address:</label>
+            <input type="text" id="d_no" name="d_no" placeholder="Door Number">
+            <input type="text" id="street_name" name="street_name" placeholder="Street Name">
+            <input type="text" id="street_no" name="street_no" placeholder="Street Number">
+            <input type="text" id="apt_number" name="apt_number" placeholder="Apartment Number">
+            <input type="text" id="city" name="city" placeholder="City">
+            <input type="text" id="state" name="state" placeholder="State">
+
+            <input type="hidden" id="person_id" name="person_id" value="{{ person_id }}">
+
+            <button type="submit">Register Now</button>
+    </form>
+    </form>
+
+    <script>
+        function calculateAge() {
+            const dob = document.getElementById('date_of_birth').value;
+            if (dob) {
+                const dobDate = new Date(dob);
+                const diffMs = Date.now() - dobDate.getTime();
+                const ageDate = new Date(diffMs);
+                const age = Math.abs(ageDate.getUTCFullYear() - 1970);
+                document.getElementById('age').value = age;
+            }
+        }
+    </script>
+</body>
+</html>

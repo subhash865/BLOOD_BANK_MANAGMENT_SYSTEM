@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storage Details for Branch {{ branch_id }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+
+        h1 {
+            color: #343a40;
+            margin-top: 50px;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Storage Details for Branch {{ branch_id }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Blood Group</th>
+                <th>Storage Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for blood_group, storage_quantity in storage_details %}
+            <tr>
+                <td>{{ blood_group }}</td>
+                <td>{{ storage_quantity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
